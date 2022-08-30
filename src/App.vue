@@ -39,11 +39,7 @@ onMounted(() => {
         </div>
 
         <div class="card-wrapper">
-          <CardFront
-            :numbers="numbers"
-            :cardName="cardName"
-            :cardMonth="cardMonth"
-          ></CardFront>
+          <CardFront :numbers="numbers" :cardName="cardName" :cardMonth="cardMonth"></CardFront>
           <CardBack></CardBack>
         </div>
       </div>
@@ -55,7 +51,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style lang="scss">
+<style>
 body {
   --card-height: 22rem;
   --card-width: 40rem;
