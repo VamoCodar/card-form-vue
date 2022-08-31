@@ -12,6 +12,7 @@
     "@formkit/addons": "^1.0.0-beta.10",
     "@formkit/vue": "^1.0.0-beta.10",
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
+    "creditcard.js": "^3.0.20",
     "gsap": "^3.11.0",
     "postcss-nesting": "^10.1.10",
     "tailwind": "^4.0.0",

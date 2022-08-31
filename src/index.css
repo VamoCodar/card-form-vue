@@ -24,3 +24,14 @@ html {
 		font-size: calc(var(--font-base) - 30%);
 	}
 }
+
+@media (min-width: 1990px) {
+	html {
+		font-size: calc(var(--font-base) + 12.25%);
+	}
+}
+@media (min-width: 2500px) {
+	html {
+		font-size: calc(var(--font-base) + 52.25%);
+	}
+}

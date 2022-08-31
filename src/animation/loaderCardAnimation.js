@@ -2,6 +2,8 @@ import gsap from "gsap";
 
 export default function loaderCardAnimation() {
 	const rows = document.querySelectorAll(".card-back .linhas .row span");
+	const gradiente = document.querySelectorAll(".degrade .gradient");
+
 	return gsap.to(rows, {
 		flex: `1 1 ${Math.floor(Math.random() * 10)}`,
 		repeat: -1,

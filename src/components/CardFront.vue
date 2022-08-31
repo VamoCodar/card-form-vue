@@ -4,7 +4,7 @@ import { defineProps } from "vue";
 import GLOBAL from "../GLOBAL.js";
 import bgCard from "../assets/images/bg-card-front.png";
 
-const props = defineProps(["numbers", "cardName", "cardMonth"]);
+const props = defineProps(["numbers", "cardName", "cardMonth", "cardBandeira"]);
 const numberEl = ref(null);
 const numbersSpaces = computed(() => GLOBAL.formatCreditNumber(props.numbers));
 </script>
@@ -15,7 +15,10 @@ const numbersSpaces = computed(() => GLOBAL.formatCreditNumber(props.numbers));
 
     <div class="circle-wrapper">
       <div class="circle1"></div>
-      <div class="circle-outline"></div>
+      <Transition mode="out-in" name="fade">
+        <div v-if="!cardBandeira" class="circle-outline"></div>
+        <img v-else class="object-contain w-[5rem] ml-2" :src="cardBandeira" />
+      </Transition>
     </div>
 
     <div class="numbers" ref="numberEl">
@@ -24,15 +27,25 @@ const numbersSpaces = computed(() => GLOBAL.formatCreditNumber(props.numbers));
 
     <div class="wrapper">
       <div class="name">{{ cardName ? cardName : "Jane Appleseed" }}</div>
-      <div class="date drop-shadow-xl">{{ cardMonth }}</div>
+      <div class="date drop-shadow-xl">
+        {{ cardMonth.mes ? cardMonth.mes : "00" }}/
+        {{ cardMonth.ano ? cardMonth.ano : "00" }}
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-* {
-  transition: all 0.4s ease;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
 }
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
 .card-front {
   box-shadow: rgba(50, 50, 93, 0.15) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.13) 0px 30px 60px -30px;
@@ -62,12 +75,5 @@ const numbersSpaces = computed(() => GLOBAL.formatCreditNumber(props.numbers));
 
 .circle-wrapper {
   @apply z-20 relative inline-flex items-center;
-}
-
-.bounce-enter-active {
-  animation: bounce-in 0.5s;
-}
-.bounce-leave-active {
-  animation: bounce-in 0.5s reverse;
 }
 </style>

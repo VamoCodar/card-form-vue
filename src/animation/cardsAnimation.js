@@ -1,18 +1,6 @@
 import gsap from "gsap";
 
 export default function cardsAnimation() {
-  gsap.set(".card-front", {
-    opacity: 0,
-    x: -60,
-  });
-  gsap.set(".card-front img", {
-    scale: 2,
-    x: 60,
-  });
-  gsap.set(".card-back", {
-    opacity: 0,
-    x: 60,
-  });
 
   return gsap
     .timeline({

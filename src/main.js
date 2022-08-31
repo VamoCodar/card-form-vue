@@ -18,3 +18,4 @@ app
 	.use(plugin, defaultConfig)
 	.mount('#app')
 
+

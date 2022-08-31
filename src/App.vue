@@ -8,10 +8,16 @@ import { onMounted, watch } from "vue";
 import GLOBAL from "./GLOBAL.js";
 import cardsAnimation from "./animation/cardsAnimation.js";
 import gradienteAnimation from "./animation/gradienteAnimation";
+import masterBandeira from "./assets/images/bandeiras/mastercard.png";
+import visaBandeira from "./assets/images/bandeiras/visa.png";
+import CardName from "./components/CardName.vue";
+import CardDate from "./components/CardDate.vue";
+import containerAnimation from "./animation/containerAnimation";
 
 const numbers = ref(null);
 const cardName = ref(null);
-const cardMonth = ref("00/00");
+const cardMonth = ref({ mes: "", ano: "" });
+const cardBandeira = ref("");
 
 watch(numbers, () => console.log(numbers.value));
 
@@ -19,14 +25,34 @@ function handleKeyNumberCard(e) {
   const value = e.target.value;
   const regexp = new RegExp("[0-9]");
   e.target.value = GLOBAL.formatCreditNumber(value).trim();
-
-  if (e.key === "Backspace") return;
+  if (e.key === "Backspace" || e.key === "Tab" || e.ctrlKey) return;
   if (!regexp.test(e.key)) e.preventDefault();
 }
+
+function handleCardBandeira(bandeira) {
+  const cartoes = [
+    ["Mastercard", masterBandeira],
+    ["Visa", visaBandeira],
+  ];
+
+  const cartao = cartoes.filter(([name]) => name === bandeira);
+
+  if (cartao.length) {
+    const [_, bandeira] = cartao[0];
+    cardBandeira.value = bandeira;
+  } else {
+    cardBandeira.value = null;
+  }
+
+  console.log(cartao);
+}
+
 onMounted(() => {
-  cardsAnimation();
-  gradienteAnimation();
+  containerAnimation().add(cardsAnimation, "-=0.6").add(gradienteAnimation, "<-1");
 });
+function changeMes(v) {
+  cardMonth.value.mes = v;
+}
 </script>
 
 <template>
@@ -39,13 +65,26 @@ onMounted(() => {
         </div>
 
         <div class="card-wrapper">
-          <CardFront :numbers="numbers" :cardName="cardName" :cardMonth="cardMonth"></CardFront>
+          <CardFront
+            :numbers="numbers"
+            :cardName="cardName"
+            :cardMonth="cardMonth"
+            :cardBandeira="cardBandeira"
+          ></CardFront>
           <CardBack></CardBack>
         </div>
       </div>
 
-      <div class="forms">
-        <CardNumber v-model="numbers" @keydown="handleKeyNumberCard"></CardNumber>
+      <div class="forms flex flex-col gap-6">
+        <!--  <FormKit type="form"> -->
+        <CardName v-model="cardName"></CardName>
+        <CardNumber
+          v-model="numbers"
+          @keydown="handleKeyNumberCard"
+          @cardBandeira="handleCardBandeira"
+        ></CardNumber>
+        <CardDate @mes="changeMes"></CardDate>
+        <!--     </FormKit> -->
       </div>
     </div>
   </div>
@@ -76,5 +115,15 @@ body {
 }
 .forms {
   @apply max-w-[31rem] m-auto w-full relative left-[6.5vw];
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 </style>
