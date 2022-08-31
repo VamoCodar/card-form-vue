@@ -48,7 +48,7 @@ function handleCardBandeira(bandeira) {
 }
 
 onMounted(() => {
-  containerAnimation().add(cardsAnimation, "-=0.6").add(gradienteAnimation, "<-1");
+  containerAnimation().add(cardsAnimation, "-=0.15").add(gradienteAnimation, "<-1");
 });
 function changeMes(v) {
   cardMonth.value.mes = v;

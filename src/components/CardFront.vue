@@ -15,10 +15,12 @@ const numbersSpaces = computed(() => GLOBAL.formatCreditNumber(props.numbers));
 
     <div class="circle-wrapper">
       <div class="circle1"></div>
+
       <Transition mode="out-in" name="fade">
         <div v-if="!cardBandeira" class="circle-outline"></div>
         <img v-else class="object-contain w-[5rem] ml-2" :src="cardBandeira" />
       </Transition>
+      
     </div>
 
     <div class="numbers" ref="numberEl">

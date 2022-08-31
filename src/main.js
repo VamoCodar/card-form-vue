@@ -4,6 +4,7 @@ import App from './App.vue'
 import { VueMaskDirective } from 'v-mask';
 import { plugin, defaultConfig } from '@formkit/vue'
 
+import { createAutoAnimatePlugin } from '@formkit/addons'
 const vMaskV2 = VueMaskDirective;
 const vMaskV3 = {
 	beforeMount: vMaskV2.bind,
@@ -15,7 +16,13 @@ const app = createApp(App)
 
 app
 	.directive('mask', vMaskV3)
-	.use(plugin, defaultConfig)
+	.use(plugin, defaultConfig({
+		plugins: [
+			createAutoAnimatePlugin({
+				// optional config
+			})
+		]
+	}))
 	.mount('#app')
 
 

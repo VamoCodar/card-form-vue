@@ -3,9 +3,9 @@ export default function containerAnimation() {
 	const gradiente = document.querySelectorAll(".degrade .gradient");
 
 	gsap.set(".gradiente-container", {
-		scaleX: 0.2,
+		scaleX: 0.5,
 		transformOrigin: "top left",
-	
+
 
 	})
 	gsap.set(".card-front", {
@@ -23,14 +23,15 @@ export default function containerAnimation() {
 
 	gsap.set(gradiente, {
 		scale: 1.5,
-		x: -30
+		x: -30,
+
 	})
 
 	return gsap.timeline({ delay: 0.3 })
 		.to(".gradiente-container", {
 			transformOrigin: "top left",
 			scale: 1,
-		
+
 		})
 
 }

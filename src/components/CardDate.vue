@@ -33,7 +33,7 @@ const mesValido = ({ value }) => value <= 12;
           maxlength="2"
           placeholder="MM"
           validation="required|mesValido"
-          validation-visibility="blur"
+          validation-visibility="submit"
           :validation-messages="{
             required: 'Mês Obrigátorio',
             mesValido: 'Insira um mês valido',

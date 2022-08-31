@@ -4,8 +4,7 @@ export default function cardsAnimation() {
 
   return gsap
     .timeline({
-      ease: "sine",
-      delay: 0.2,
+      ease: "sine.out",
     })
     .to(
       ".card-front",
@@ -26,7 +25,7 @@ export default function cardsAnimation() {
       ".card-front img",
       {
         scale: 1,
-        duration: 0.2,
+        duration: 0.6,
         x: 0,
       },
       "time"

@@ -18,7 +18,7 @@ const getNameOfCard = (value, input) => {
     type="text"
     label="Numero do cartâo"
     validation="validCard"
-    validation-visibility="live"
+    validation-visibility="submit"
     :validation-rules="{ validCard }"
     :validation-messages="{
       validCard: 'Cartão Invalido.',
